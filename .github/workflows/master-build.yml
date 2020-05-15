@@ -17,7 +17,7 @@ name: Master Build
 on:
   push:
     branches:
-      - master
+      - fanzhao1986/develop
 
 jobs:
   build:
@@ -63,6 +63,6 @@ jobs:
       - name: Push generated code
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: latest
+          github_token: ${{ secrets.FAN_TOKEN }}
+          branch: fanzhao1986/latest
           force: true
