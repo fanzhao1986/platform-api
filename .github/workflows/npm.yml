@@ -1,9 +1,15 @@
 ---
 name: NPM
+#on:
+#  push:
+#    tags:
+#      - v*
+
 on:
   push:
-    tags:
-      - v*
+    branches:
+      - fanzhao1986/develop
+
 jobs:
   ci:
     runs-on: ubuntu-latest

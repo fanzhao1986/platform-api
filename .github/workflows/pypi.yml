@@ -12,16 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-name: Package
+name: Pypi package
 
-#on:
-#  push:
-#    tags:
-#      - v*
 on:
   push:
-    branches:
-      - fanzhao1986/latest
+    tags:
+      - v*
 
 jobs:
   package:
@@ -37,12 +33,12 @@ jobs:
       run: |
         cd python
         python -m pip install --upgrade pip
-        pip install -r requirements.in
         pip install wheel setuptools setuptools_scm
 
     - name: Build package
       run: |
-        export SETUPTOOLS_SCM_PRETEND_VERSION=0.0.1
+        cd python
+        export SETUPTOOLS_SCM_PRETEND_VERSION=${GITHUB_REF:10}
         python setup.py sdist bdist_wheel
 
     - name: Publish package to PyPI
@@ -50,3 +46,5 @@ jobs:
       with:
         user: __token__
         password: ${{ secrets.PYPI_PASSWORD }}
+        packages_dir: python/dist
+
